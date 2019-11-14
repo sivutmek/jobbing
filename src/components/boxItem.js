@@ -1,9 +1,5 @@
 import React from 'react'
 
-const handleFavorite = () => {
-
-}
-
 const BoxItem = (props) => {
   const {company_logo, company, title, location, type} = props.item
 
@@ -16,7 +12,8 @@ const BoxItem = (props) => {
           <p>{location}</p>
           <p>{type}</p>
           <div className="add-button">
-            <button>Add</button>
+          {/* <button>Add</button> */}
+          <button onClick={props.handleFaveToggle}>{(props.isFave) ? "Remove" : "Add"}</button>
           </div>
           </div>
         </div>

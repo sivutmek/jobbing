@@ -25,7 +25,7 @@ class App extends Component {
     input2: '',
     isDetail: false,
     selectedItem: {},
-    selectedItem2: temp
+    faves: []
   }
 
   // componentDidMount = () => {
@@ -60,8 +60,8 @@ class App extends Component {
       });
   }
 
-  handleAddFavorite = () => {
-
+  handleChangeMode = (mode) => {
+    this.setState({mode})
   }
 
   handleDetailPage = (item) => {
@@ -83,12 +83,43 @@ class App extends Component {
       });
   }
 
+  handleFaveToggle = (e, item) => {
+    e.stopPropagation();
+    const faves = [...this.state.faves];
+    const jobIndex = faves.indexOf(item);
+    if (jobIndex === -1) {
+      faves.push(item);
+    } else {
+      faves.splice(jobIndex, 1);
+    }
+    this.setState({ faves });
+  };
+
   render(){
     let jobs = []
-    const {data, isDetail} = this.state
-
-    if(data!==[] && isDetail!==true){
-      jobs = (data).map((item, i) => (<BoxItem item={item} key={i} handleDetailPage={() => this.handleDetailPage(item)}/>))
+    let faveJobs
+    const {data, isDetail, mode, faves} = this.state
+    if(data!==[] && isDetail!==true && mode==='search'){
+      jobs = (data).map((item, i) => 
+      (<BoxItem 
+        item={item} 
+        key={i} 
+        handleDetailPage={() => this.handleDetailPage(item)}
+        isFave = {this.state.faves.includes(item)}
+        handleFaveToggle = {(e) => this.handleFaveToggle(e,item)}
+        />))
+    }
+    else if(isDetail!==true && mode==='fave'){
+      if(faves!==[]){
+        faveJobs = (faves).map((item, i) =>
+        (<BoxItem 
+          item={item} 
+          key={i} 
+          handleDetailPage={() => this.handleDetailPage(item)}
+          isFave = {this.state.faves.includes(item)}
+          handleFaveToggle = {(e) => this.handleFaveToggle(e,item)}
+        />))
+        }
     }
 
     return (
@@ -103,14 +134,15 @@ class App extends Component {
           <h2>Mode</h2>
           </div>
           <div className="mode-grids">
-            <div className="search-mode-tab">
+            <div className={"search-mode-tab" + (this.state.mode === "search" ? " press" : "")} onClick={()=>this.handleChangeMode('search')}>
               <h2>Search</h2>
             </div>
-            <div className="favorite-mode-tab">
+            <div className={"favorite-mode-tab" + (this.state.mode === "fave" ? " press" : "")} onClick={()=>this.handleChangeMode('fave')}>
               <h2>Favorite</h2>
             </div>
           </div>
 
+          {this.state.mode === "search" ? 
           <div className="test-flex">
           <div>
             <h3>Field</h3>
@@ -129,6 +161,8 @@ class App extends Component {
             </button>
           </div>
           </div>
+            : ''}
+
         </div>
 
         <div className="right-grid"> 
@@ -137,11 +171,13 @@ class App extends Component {
           </div>
 
           <div className="result-grids">
-          {jobs}
+            {jobs}
+            {faveJobs}
           </div>
 
           <div className="detail">
-            {(isDetail===true) ? <DetailPage item={this.state.selectedItem} handleGoBack={this.handleGoBack}/> : ''}
+            {(isDetail===true) ? 
+            <DetailPage item={this.state.selectedItem} handleGoBack={this.handleGoBack}/> : ''}
           </div>
 
         </div>

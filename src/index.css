@@ -47,7 +47,7 @@ code {
 .mode-grids{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  /* background-color: rgb(14, 6, 59); */
+  background-color: rgb(14, 6, 59);
   text-align: center;
   /* color: white; */
 }
@@ -57,7 +57,17 @@ code {
   background-color: rgb(209, 206, 223);
 }
 
-.search-mode-tab .press {
+.search-mode-tab.press {
+  color: white;
+  background-color: rgb(14, 6, 59)
+}
+
+.favorite-mode-tab {
+  color: gray;
+  background-color: rgb(209, 206, 223);
+}
+
+.favorite-mode-tab.press {
   color: white;
   background-color: rgb(14, 6, 59)
 }
@@ -78,6 +88,7 @@ code {
   width: 90%;
   margin: 30px;
   height: 180px;
+  cursor: pointer
 }
 
 .card:hover {
