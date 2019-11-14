@@ -11,3 +11,100 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+*{
+  margin: 0;
+}
+
+.app-header{
+  width: 100%;
+  height: 60px;
+  background-color: rgb(14, 6, 59);
+  color: white;
+  text-align: center;
+  padding-top: 20px
+}
+
+.grids{
+  display:grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.category{
+  text-align: center;
+  background-color: white;
+  border: 2px solid black
+}
+
+.category-noline{
+  text-align: center;
+  background-color: white;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.mode-grids{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  /* background-color: rgb(14, 6, 59); */
+  text-align: center;
+  /* color: white; */
+}
+
+.search-mode-tab {
+  color: gray;
+  background-color: rgb(209, 206, 223);
+}
+
+.search-mode-tab .press {
+  color: white;
+  background-color: rgb(14, 6, 59)
+}
+
+.left-grid{
+  border-right: 2px solid black;
+}
+
+.test-flex{
+  display: block;
+  padding: 25px
+}
+
+.card {
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 90%;
+  margin: 30px;
+  height: 180px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.result-grids {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.add-button {
+  color:red
+}
+
+.detail {
+  padding: 15px;
+}
+
+.detail-info > h4{
+  text-indent: 20px;
+}
+
+.go-back-button{
+  margin-bottom: 40px;
+}
